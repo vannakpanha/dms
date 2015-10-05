@@ -11,4 +11,9 @@ class Logins extends CI_Controller
     {
         $this->load->view('login/login_form');
     }
+    
+    function login()
+    {
+        
+    }
 }
