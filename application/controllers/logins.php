@@ -9,10 +9,19 @@ class Logins extends CI_Controller
     
     function index()
     {
+        if($this->session->userdata('person_id'))
+        {
+            redirect('home/dashboard');
+        }
         $this->load->view('login/login_form');
     }
-
-    function login(){
+    
+        function login(){
+        
+        if($this->session->userdata('person_id'))
+        {
+            redirect('home/dashboard');
+        }
     	$data['email'] = $this->input->post('email');
     	$data['password'] = $this->input->post('password');
     	$this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check');
@@ -25,8 +34,7 @@ class Logins extends CI_Controller
            {
               $this->session->set_userdata('first',$profile->row()->first_name);
                $this->session->set_userdata('person_id',$profile->row()->id);
-               echo $this->session->userdata('first');
-                echo $this->session->userdata('person_id');
+               redirect('home/dashboard');
            }
         }
     	
